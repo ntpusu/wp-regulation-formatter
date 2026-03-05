@@ -1,0 +1,101 @@
+/* sulaw-style.css — 法規樣式表，UTF-8 */
+/* 所有 class 均以 sulaw- 開頭，避免與佈景主題或其他之自訂樣式衝突 */
+
+/* ── 章節標題容器 ── */
+div.sulaw-heading {
+    font-weight: bold;
+    font-size: larger;
+}
+
+/* 編 */
+p.sulaw-div  { margin-left: 0; }
+/* 章 */
+p.sulaw-chap { margin-left: 1em; }
+/* 節 */
+p.sulaw-sec  { margin-left: 2em; }
+/* 款（作為標題） */
+p.sulaw-hsub  { margin-left: 4em; }
+/* 項（作為標題） */
+p.sulaw-hpara { margin-left: 2em; }
+/* 目（作為標題） */
+p.sulaw-hitem { margin-left: 5em; }
+
+/* ── 單條容器 ── */
+div.sulaw-article {
+    counter-reset: para-num;
+    position: relative;
+}
+
+/* 條號 */
+p.sulaw-artnum {
+    font-weight: bold;
+    margin-top: 0.8em;
+    margin-bottom: 0;
+}
+
+/* 項 */
+p.sulaw-para {
+    margin-left: 2em;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+/*
+ * 當一條內有多個「項」時，以偽元素自動編列羅馬數字序號。
+ * :has(p.sulaw-para ~ p.sulaw-para) 表示容器內存在至少兩個項，
+ * 單項條文不觸發此規則，序號不顯示。
+ * 瀏覽器支援：Chrome 105+、Safari 15.4+、Firefox 121+（2023 年起全面支援）。
+ * 若要用羅馬數字，請把 content 改成 counter(para-num, upper-roman)
+ */
+div.sulaw-article:has(p.sulaw-para ~ p.sulaw-para) p.sulaw-para::before {
+    counter-increment: para-num;
+    content: counter(para-num);
+    display: inline-block;
+    position: absolute;
+    left: -1em;
+    width: 1.8em;
+    text-align: right;
+    font-family: 'Times New Roman', Times, serif;
+    color: #777;
+}
+
+/* 款 */
+p.sulaw-sub {
+    margin-left: 4em;
+    text-indent: -2em;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+/* 目 */
+p.sulaw-item {
+    margin-left: 7em;
+    text-indent: -3em;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+/* 其他文字（備用） */
+p.sulaw-misc {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+/* ── 列印樣式 ── */
+@media print {
+    @page {
+        margin-top: 1.3cm;
+        margin-bottom: 1.5cm;
+        margin-left: 1.7cm;
+        margin-right: 1.7cm;
+        size: A4 portrait;
+    }
+
+    div.sulaw-heading {
+        page-break-after: avoid;
+    }
+
+    p.sulaw-artnum {
+        page-break-after: avoid;
+    }
+}
