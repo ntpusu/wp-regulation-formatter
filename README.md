@@ -1,5 +1,7 @@
 # NTPUSU WordPress Regulation Formatter
 
+這個專案已經棄用並歸檔，請統一使用 [ntpusu/regulation-sync-plugin](https://github.com/ntpusu/regulation-sync-plugin) 。
+
 臺北大學學生會 WordPress 法規格式化外掛。
 
 此外掛專供本會網站使用，自動偵測 WordPress 網站中歸類於「法規」分類（含子分類）下的文章，並將 Custom HTML 區塊內的純文字法規內容，透過前端 JavaScript 解析為帶有 CSS class 的結構化 HTML，套用專屬樣式。
